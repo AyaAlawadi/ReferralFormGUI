@@ -1,0 +1,33 @@
+﻿@page "/fetchdata"
+@using ReferralFormGUI.Services;
+@using ReferralFormGUI.Models;
+@inject HttpClient Http
+
+<PageTitle>Weather forecast</PageTitle>
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+
+
+@code {
+    
+    public INationalClient _client;
+    public NationalClient client;
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+
+        var Endpoint = new NationalWebApiRequest<string>
+            {
+                Endpoint = "/common/lists"
+            };
+
+        var token = client.GetAccessToken();
+        var list = await _client.Get<string , InitiativeApiResponse>(Endpoint);
+    }
+
+
+}
